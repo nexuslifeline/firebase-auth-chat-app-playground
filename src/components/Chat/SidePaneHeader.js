@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import User from "./User";
 
-export default function SidePaneHeader() {
+export default function SidePaneHeader({ onSignOut }) {
   return (
     <Box
       padding={"0 10px"}
@@ -16,6 +16,7 @@ export default function SidePaneHeader() {
       }}
     >
       <User name="Paul Rueda" subtitle="Online" />
+      <Box onClick={onSignOut}>Sign out</Box>
     </Box>
   );
 }

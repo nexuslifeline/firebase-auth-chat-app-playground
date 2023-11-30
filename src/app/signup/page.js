@@ -1,15 +1,35 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
+import useFirebase from "@/shared/hooks/useFirebase";
+
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const { register } = useFirebase();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const response = await register(email, password);
+      console.log("response", response);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(true);
+    }
   };
 
   return (
@@ -24,6 +44,8 @@ export default function SignIn() {
       >
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             margin="normal"
             required
             fullWidth
@@ -33,6 +55,8 @@ export default function SignIn() {
             autoFocus
           />
           <TextField
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             margin="normal"
             required
             fullWidth
@@ -42,6 +66,8 @@ export default function SignIn() {
             autoComplete="email"
           />
           <TextField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             margin="normal"
             required
             fullWidth
@@ -52,7 +78,7 @@ export default function SignIn() {
             autoComplete="current-password"
           />
 
-          <TextField
+          {/* <TextField
             margin="normal"
             required
             fullWidth
@@ -60,7 +86,7 @@ export default function SignIn() {
             label="Confirm Password"
             type="password"
             id="confirm"
-          />
+          /> */}
 
           <Button
             type="submit"

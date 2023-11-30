@@ -1,11 +1,20 @@
-"use client"
+"use client";
 
-import * as React from 'react';
-import Chat from '@/components/Chat';
+import { useRouter } from "next/navigation";
 
+import Chat from "@/components/Chat";
+import withAuth from "@/shared/hoc/withAuth";
+import useFirebase from "@/shared/hooks/useFirebase";
 
-export default function SignIn() {
-  return (
-    <Chat />
-  );
-}
+const HomePage = () => {
+  const { logout } = useFirebase();
+  const router = useRouter();
+  const handleSignOut = () => {
+    logout();
+    router.push("/");
+  };
+
+  return <Chat onSignOut={handleSignOut} />;
+};
+
+export default withAuth(HomePage);

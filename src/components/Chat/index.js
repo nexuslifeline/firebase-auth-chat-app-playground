@@ -5,7 +5,7 @@ import SidePaneHeader from "./SidePaneHeader";
 import UserList from "./UserList";
 import ChatBox from "./ChatBox";
 
-export default function Chat() {
+export default function Chat({ onSignOut }) {
   return (
     <Box
       margin={"0 auto"}
@@ -21,7 +21,7 @@ export default function Chat() {
       }}
     >
       <SidePane>
-        <SidePaneHeader />
+        <SidePaneHeader onSignOut={onSignOut} />
         <UserList />
       </SidePane>
       <ChatBox />
