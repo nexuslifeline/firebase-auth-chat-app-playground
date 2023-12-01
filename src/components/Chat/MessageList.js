@@ -1,8 +1,15 @@
+import { useEffect } from "react";
+
 import Box from "@mui/material/Box";
 
 import MessageItem from "./MessageItem";
+import useMessages from "@/shared/hooks/firebase/useMessages";
+import { useAuthContext } from "@/shared/context/AuthContext";
 
-export default function MessageList() {
+export default function MessageList({ threadId }) {
+  const { messages } = useMessages(threadId);
+  const { currentUser } = useAuthContext();
+
   return (
     <Box
       sx={{
@@ -28,8 +35,8 @@ export default function MessageList() {
         },
       }}
     >
-      {Array.from({ length: 30 }).map((_, index) => (
-        <MessageItem key={index} hasAvatar={index % 2 === 0} />
+      {messages?.map((data, index) => (
+        <MessageItem key={index} data={data} />
       ))}
     </Box>
   );

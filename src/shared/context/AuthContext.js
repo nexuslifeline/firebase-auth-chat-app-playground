@@ -16,17 +16,20 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuth(({ uid } = {}) => {
-      if (!uid) {
+    const unsubscribe = onAuth((u) => {
+      if (!u?.uid) {
         setCurrentUser(null);
+        setIsLoading(false);
         return;
       }
 
-      getUser(uid).then((user) => {
+      getUser(u.uid).then((user) => {
         setCurrentUser(user);
         setIsLoading(false);
       });
     });
+
+    console.log("fired!");
 
     return () => unsubscribe();
   }, []);

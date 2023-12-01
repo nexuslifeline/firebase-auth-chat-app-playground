@@ -5,14 +5,18 @@ import { Typography } from "@mui/material";
 import AvatarMaker from "../AvatarMaker";
 
 export default function User({
-  name = "",
+  data = {},
   subtitle = "",
   size = 32,
+  onSelect,
   ...props
 }) {
   return (
-    <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center", ...props }}>
-      <AvatarMaker name={name} size={size} />
+    <Box
+      onClick={() => onSelect?.(data)}
+      sx={{ flexGrow: 1, display: "flex", alignItems: "center", ...props }}
+    >
+      <AvatarMaker name={data?.name} size={size} />
       <Box
         marginLeft={1}
         sx={{
@@ -21,9 +25,9 @@ export default function User({
           justifyContent: "center",
         }}
       >
-        {name && (
+        {data?.name && (
           <Typography paragraph margin={0} lineHeight={1.2} fontSize={14}>
-            {name}
+            {data.name}
           </Typography>
         )}
         {subtitle && (

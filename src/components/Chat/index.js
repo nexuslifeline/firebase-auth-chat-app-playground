@@ -4,8 +4,13 @@ import SidePane from "./SidePane";
 import SidePaneHeader from "./SidePaneHeader";
 import UserList from "./UserList";
 import ChatBox from "./ChatBox";
+import { useThreadContext } from "@/shared/context/ThreadContext";
 
 export default function Chat({ onSignOut }) {
+  const { currentThreadId } = useThreadContext();
+
+  console.log("currentThreadId", currentThreadId);
+
   return (
     <Box
       margin={"0 auto"}
@@ -24,7 +29,7 @@ export default function Chat({ onSignOut }) {
         <SidePaneHeader onSignOut={onSignOut} />
         <UserList />
       </SidePane>
-      <ChatBox />
+      <ChatBox threadId={currentThreadId} />
     </Box>
   );
 }

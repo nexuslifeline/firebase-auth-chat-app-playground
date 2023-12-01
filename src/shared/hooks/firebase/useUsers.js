@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { getFirestore } from "firebase/firestore";
 import {
   doc,
@@ -24,7 +23,6 @@ export default function useUsers() {
   };
 
   const getUser = async (uid) => {
-    console.log("getuser fired!");
     const userRef = doc(db, "users", uid);
     const user = await getDoc(userRef);
     return user.data();

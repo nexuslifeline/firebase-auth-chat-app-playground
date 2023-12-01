@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 
 import "@/config/firebase";
 import { AuthContextProvider } from "@/shared/context/AuthContext";
+import { ThreadContextProvider } from "@/shared/context/ThreadContext";
 
 import "./globals.css";
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <main className="main">
-          <AuthContextProvider>{children}</AuthContextProvider>
+          <AuthContextProvider>
+            <ThreadContextProvider>{children}</ThreadContextProvider>
+          </AuthContextProvider>
         </main>
       </body>
     </html>

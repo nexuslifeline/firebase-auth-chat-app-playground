@@ -16,7 +16,7 @@ export default function ChatBoxHeader() {
           bgcolor: "grey.100",
         }}
       >
-        <User name="John Doe" />
+        <User data={{ name: "John Doe" }} />
       </Box>
     </Box>
   );

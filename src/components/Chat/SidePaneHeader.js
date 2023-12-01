@@ -19,7 +19,7 @@ export default function SidePaneHeader({ onSignOut }) {
         overflow: "hidden",
       }}
     >
-      <User name={currentUser?.name || "Unknown"} subtitle="Online" />
+      <User data={{ name: currentUser?.name || "Unknown" }} subtitle="Online" />
       <Box onClick={onSignOut}>Sign out</Box>
     </Box>
   );
