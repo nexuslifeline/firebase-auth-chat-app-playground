@@ -1,24 +1,18 @@
-import { useEffect, useContext, useState } from "react";
-import { AuthContext } from "@/shared/context/AuthContext";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "@/shared/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 const withAuth = (WrappedComponent) => {
   const ComponentWithAuth = (props) => {
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, isLoading } = useAuthContext();
     const router = useRouter();
 
-    const [isMounted, setIsMounted] = useState(false);
-
     useEffect(() => {
-      setIsMounted(true);
-    }, []);
-
-    useEffect(() => {
-      if (!isMounted) return;
+      if (isLoading) return;
       if (!currentUser) router.push("/");
-    }, [isMounted, currentUser, router]);
+    }, [isLoading, currentUser, router]);
 
-    return isMounted && currentUser ? <WrappedComponent {...props} /> : null;
+    return !isLoading && currentUser ? <WrappedComponent {...props} /> : null;
   };
 
   return ComponentWithAuth;

@@ -1,28 +1,38 @@
 "use client";
 
 import { useEffect, useState, createContext, useContext } from "react";
-import useFirebase from "../hooks/useFirebase";
+import useFirebaseAuth from "../hooks/firebase/useFirebaseAuth";
+import useUsers from "../hooks/firebase/useUsers";
 
 export const AuthContext = createContext({});
 
 export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
-  const { onAuth } = useFirebase();
+  const { onAuth } = useFirebaseAuth();
+  const { getUser } = useUsers();
+
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuth((user) => {
-      setCurrentUser(user ? user : null);
-      setIsLoading(false);
+    const unsubscribe = onAuth(({ uid } = {}) => {
+      if (!uid) {
+        setCurrentUser(null);
+        return;
+      }
+
+      getUser(uid).then((user) => {
+        setCurrentUser(user);
+        setIsLoading(false);
+      });
     });
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, isLoading }}>
       {isLoading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );

@@ -11,10 +11,10 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
-import useFirebase from "@/shared/hooks/useFirebase";
+import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
 
 export default function SignIn() {
-  const { signIn } = useFirebase();
+  const { signIn } = useFirebaseAuth();
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -26,9 +26,7 @@ export default function SignIn() {
     try {
       setIsLoading(true);
       const response = await signIn(email, password);
-      alert("success");
       router.push("/home");
-      console.log("response", response);
     } catch (err) {
       console.error(err);
     } finally {
@@ -80,6 +78,7 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isLoading}
           >
             Sign In
           </Button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,10 +9,13 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
-import useFirebase from "@/shared/hooks/useFirebase";
+import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
+import useUsers from "@/shared/hooks/firebase/useUsers";
 
 export default function SignIn() {
-  const { register } = useFirebase();
+  const { register } = useFirebaseAuth();
+  const { addUser } = useUsers();
+  const router = useRouter();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,11 +28,13 @@ export default function SignIn() {
     try {
       setIsLoading(true);
       const response = await register(email, password);
-      console.log("response", response);
+      addUser({ name, uid: response.user.uid });
+      router.push("/home");
     } catch (err) {
       console.error(err);
+      alert("Error occured!");
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
@@ -93,6 +99,7 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isLoading}
           >
             Register
           </Button>

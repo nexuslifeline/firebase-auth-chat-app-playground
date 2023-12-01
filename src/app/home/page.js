@@ -4,11 +4,12 @@ import { useRouter } from "next/navigation";
 
 import Chat from "@/components/Chat";
 import withAuth from "@/shared/hoc/withAuth";
-import useFirebase from "@/shared/hooks/useFirebase";
+import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
 
 const HomePage = () => {
-  const { logout } = useFirebase();
+  const { logout } = useFirebaseAuth();
   const router = useRouter();
+
   const handleSignOut = () => {
     logout();
     router.push("/");

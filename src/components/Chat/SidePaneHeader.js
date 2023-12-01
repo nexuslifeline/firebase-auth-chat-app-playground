@@ -1,7 +1,11 @@
 import Box from "@mui/material/Box";
+
 import User from "./User";
+import { useAuthContext } from "@/shared/context/AuthContext";
 
 export default function SidePaneHeader({ onSignOut }) {
+  const { currentUser } = useAuthContext();
+
   return (
     <Box
       padding={"0 10px"}
@@ -15,7 +19,7 @@ export default function SidePaneHeader({ onSignOut }) {
         overflow: "hidden",
       }}
     >
-      <User name="Paul Rueda" subtitle="Online" />
+      <User name={currentUser?.name || "Unknown"} subtitle="Online" />
       <Box onClick={onSignOut}>Sign out</Box>
     </Box>
   );
