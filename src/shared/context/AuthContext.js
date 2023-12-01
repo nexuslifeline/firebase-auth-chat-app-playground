@@ -29,8 +29,6 @@ export const AuthContextProvider = ({ children }) => {
       });
     });
 
-    console.log("fired!");
-
     return () => unsubscribe();
   }, []);
 

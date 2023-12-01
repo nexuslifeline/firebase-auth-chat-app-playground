@@ -16,6 +16,7 @@ const db = getFirestore(app);
 
 export default function useUsers() {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const addUser = async (user) => {
     const data = { ...user, createdAt: Timestamp.now() };
@@ -37,14 +38,11 @@ export default function useUsers() {
         items.push(doc.data());
       });
       setUsers(items);
+      setIsLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    console.log("users", users);
-  }, [users]);
-
-  return { addUser, getUser, users };
+  return { addUser, getUser, users, isLoading };
 }

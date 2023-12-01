@@ -1,15 +1,18 @@
 import Box from "@mui/material/Box";
+
 import ChatBoxActions from "./ChatBoxActions";
 import ChatBoxHeader from "./ChatBoxHeader";
 import MessageList from "./MessageList";
+import { useThreadContext } from "@/shared/context/ThreadContext";
 
-export default function ChatBox({ threadId, senderUid, recipientUid }) {
-  console.log("ChatBox threadId", threadId);
+export default function ChatBox({ threadId }) {
+  const { sender, recipient } = useThreadContext();
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-      <ChatBoxHeader />
+      <ChatBoxHeader recipient={recipient} />
       <MessageList threadId={threadId} />
-      <ChatBoxActions senderUid={senderUid} recipientUid={recipientUid} />
+      <ChatBoxActions sender={sender} recipient={recipient} />
     </Box>
   );
 }

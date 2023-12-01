@@ -9,8 +9,6 @@ import { useThreadContext } from "@/shared/context/ThreadContext";
 export default function Chat({ onSignOut }) {
   const { currentThreadId } = useThreadContext();
 
-  console.log("currentThreadId", currentThreadId);
-
   return (
     <Box
       margin={"0 auto"}

@@ -3,17 +3,18 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import useThreads from "@/shared/hooks/firebase/useThreads";
-import { useThreadContext } from "@/shared/context/ThreadContext";
 
-export default function ChatBoxActions() {
+import useThreads from "@/shared/hooks/firebase/useThreads";
+
+export default function ChatBoxActions({ sender, recipient }) {
   const { addThreadMessage } = useThreads();
-  const { sender, recipient } = useThreadContext();
 
   const [message, setMessage] = useState("");
 
   const handleSend = () => {
-    addThreadMessage({ message, sender, recipient });
+    const text = message.trim();
+    setMessage("");
+    addThreadMessage({ message: text, sender, recipient });
   };
 
   return (

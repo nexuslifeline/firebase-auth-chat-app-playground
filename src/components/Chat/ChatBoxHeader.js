@@ -1,8 +1,8 @@
-import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+
 import User from "./User";
 
-export default function ChatBoxHeader() {
+export default function ChatBoxHeader({ recipient }) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box
@@ -16,7 +16,7 @@ export default function ChatBoxHeader() {
           bgcolor: "grey.100",
         }}
       >
-        <User data={{ name: "John Doe" }} />
+        {recipient?.name && <User data={recipient} />}
       </Box>
     </Box>
   );

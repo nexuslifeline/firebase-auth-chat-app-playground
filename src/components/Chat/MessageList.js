@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import Box from "@mui/material/Box";
 
 import MessageItem from "./MessageItem";
@@ -8,7 +6,6 @@ import { useAuthContext } from "@/shared/context/AuthContext";
 
 export default function MessageList({ threadId }) {
   const { messages } = useMessages(threadId);
-  const { currentUser } = useAuthContext();
 
   return (
     <Box

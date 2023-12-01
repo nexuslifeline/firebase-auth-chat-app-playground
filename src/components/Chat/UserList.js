@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Box from "@mui/material/Box";
 import User from "./User";
 
@@ -7,7 +9,7 @@ import { useAuthContext } from "@/shared/context/AuthContext";
 import { useThreadContext } from "@/shared/context/ThreadContext";
 
 export default function UserList() {
-  const { users } = useUsers();
+  const { users, isLoading } = useUsers();
   const { currentUser } = useAuthContext();
   const { setCurrentThreadId, setSender, setRecipient } = useThreadContext();
   const { addThread, createThreadId } = useThreads();
@@ -21,6 +23,13 @@ export default function UserList() {
 
     await addThread(currentUser, recipient);
   };
+
+  useEffect(() => {
+    if (!isLoading && users.length > 0) {
+      console.log("users[0]", users[0]);
+      handleSelect(users[0]);
+    }
+  }, [isLoading]);
 
   return (
     <Box sx={{ flexGrow: 1, overflow: "auto" }}>
