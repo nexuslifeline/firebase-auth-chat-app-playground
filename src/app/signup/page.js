@@ -28,7 +28,7 @@ export default function SignIn() {
     try {
       setIsLoading(true);
       const response = await register(email, password);
-      addUser({ name, uid: response.user.uid });
+      await addUser({ name, uid: response.user.uid });
       router.push("/home");
     } catch (err) {
       console.error(err);
