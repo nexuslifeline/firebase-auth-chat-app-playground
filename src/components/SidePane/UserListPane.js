@@ -17,6 +17,7 @@ export default function UserListPane() {
   const [isOpen, setIsOpen] = useState(true);
   const [width, setWidth] = useState(280);
   const [isMounted, setIsMounted] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (!isMounted) return;
@@ -46,6 +47,8 @@ export default function UserListPane() {
     >
       <Box sx={{ padding: "0 10px", display: isOpen ? "flex" : "none" }}>
         <TextField
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           margin="normal"
           required
           fullWidth
@@ -56,7 +59,7 @@ export default function UserListPane() {
           autoFocus
         />
       </Box>
-      <UserList sx={{ display: isOpen ? "flex" : "none" }} />
+      <UserList search={search} sx={{ display: isOpen ? "flex" : "none" }} />
       <IconButton
         onClick={() => setIsOpen((p) => !p)}
         size="small"
