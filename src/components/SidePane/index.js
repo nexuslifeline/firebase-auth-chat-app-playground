@@ -13,7 +13,13 @@ export default function SidePane({ children }) {
       }}
     >
       <ProfilePane />
-      <Box sx={{ minWidth: 280 }}>
+      <Box
+        sx={{
+          overflow: "hidden",
+          minWidth: { xs: 0, sm: 280 },
+          width: { xs: 0 },
+        }}
+      >
         <UserList />
       </Box>
     </Box>

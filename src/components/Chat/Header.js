@@ -4,7 +4,7 @@ import User from "@/components/Users/User";
 
 export default function ChatBoxHeader({ recipient }) {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ height: 60, display: "flex", width: "100%" }}>
       <Box
         sx={{
           display: "flex",
@@ -13,7 +13,10 @@ export default function ChatBoxHeader({ recipient }) {
           padding: "0 20px",
           borderBottom: 1,
           borderBottomColor: "divider",
-          bgcolor: "grey.5",
+          width: "100%",
+          backgroundColor: "background.paper",
+          width: "100%",
+          position: "fixed",
         }}
       >
         {recipient?.name && <User data={recipient} size={36} />}

@@ -26,24 +26,30 @@ export default function ChatBoxActions({ sender, recipient }) {
       sx={{
         padding: "10px 15px",
         display: "flex",
+        backgroundColor: "background.paper",
+        width: "100%",
+        borderTop: 1,
+        borderTopColor: "divider",
       }}
     >
-      <TextField
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            handleSend();
-          }
-        }}
-        size="normal"
-        sx={{
-          flexGrow: 1,
-          borderRadius: 4,
-          marginRight: "10px",
-        }}
-        autoFocus
-      />
+      <Box sx={{ flexGrow: 1 }}>
+        <TextField
+          value={message}
+          fullWidth
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSend();
+            }
+          }}
+          size="normal"
+          sx={{
+            flexGrow: 1,
+            marginRight: "10px",
+          }}
+          autoFocus
+        />
+      </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <IconButton
           aria-label="send"
