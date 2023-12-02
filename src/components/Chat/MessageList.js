@@ -2,10 +2,10 @@ import Box from "@mui/material/Box";
 
 import MessageItem from "./MessageItem";
 import useMessages from "@/shared/hooks/firebase/useMessages";
-import { useAuthContext } from "@/shared/context/AuthContext";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function MessageList({ threadId }) {
-  const { messages } = useMessages(threadId);
+  const { messages, isLoading } = useMessages(threadId);
 
   return (
     <Box
@@ -32,9 +32,23 @@ export default function MessageList({ threadId }) {
         },
       }}
     >
-      {messages?.map(
-        (data, index) =>
-          data?.message && <MessageItem key={index} data={data} />
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        messages?.map(
+          (data, index) =>
+            data?.message && <MessageItem key={index} data={data} />
+        )
       )}
     </Box>
   );

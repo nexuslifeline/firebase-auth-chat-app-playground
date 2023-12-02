@@ -18,9 +18,11 @@ import { app } from "@/config/firebase";
 const db = getFirestore(app);
 export default function useMessages(threadId) {
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!threadId) return;
+    setIsLoading(true);
 
     const q = query(
       collection(db, "threads", threadId, "messages"),
@@ -33,10 +35,11 @@ export default function useMessages(threadId) {
         items.push(doc.data());
       });
       setMessages(items);
+      setTimeout(() => setIsLoading(false), 250);
     });
 
     return () => unsubscribe();
   }, [threadId]);
 
-  return { messages };
+  return { messages, isLoading };
 }
