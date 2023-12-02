@@ -32,8 +32,32 @@ export default function UserList({ sx }) {
   }, [isLoading]);
 
   return (
-    <Box sx={{ flexGrow: 1, overflow: "auto", padding: "0 12px", ...sx }}>
-      <Box>
+    <Box
+      sx={{
+        flexGrow: 1,
+        height: "calc(100% - 60px)",
+        ...sx,
+      }}
+    >
+      <Box
+        sx={{
+          height: "100%",
+          overflow: "auto",
+          padding: "0 12px",
+          "&::-webkit-scrollbar": {
+            width: "8px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "grey.300",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "grey.500",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "grey.300",
+          },
+        }}
+      >
         {users.map(
           (user) =>
             currentUser?.uid !== user?.uid && (

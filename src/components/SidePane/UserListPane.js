@@ -39,8 +39,22 @@ export default function UserListPane() {
       sx={{
         width: isOpen ? width : 0,
         position: "relative",
+        height: "100%",
       }}
     >
+      <Box sx={{ padding: "0 10px", display: isOpen ? "block" : "none" }}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="search"
+          placeholder="Search"
+          name="search"
+          size="small"
+          autoFocus
+        />
+      </Box>
+      <UserList sx={{ display: isOpen ? "block" : "none" }} />
       <IconButton
         onClick={() => setIsOpen((p) => !p)}
         size="small"
@@ -58,19 +72,6 @@ export default function UserListPane() {
           <ChevronLeftIcon sx={{ color: "secondary.main" }} />
         )}
       </IconButton>
-      <Box sx={{ padding: "0 10px", display: isOpen ? "block" : "none" }}>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="search"
-          placeholder="Search"
-          name="search"
-          size="small"
-          autoFocus
-        />
-      </Box>
-      <UserList sx={{ display: isOpen ? "block" : "none" }} />
     </Box>
   );
 }

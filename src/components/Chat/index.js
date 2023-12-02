@@ -9,7 +9,14 @@ export default function ChatBox() {
   const { sender, recipient, currentThreadId } = useThreadContext();
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
+        height: "100%",
+      }}
+    >
       <ChatBoxHeader recipient={recipient} />
       <MessageList threadId={currentThreadId} />
       <SendMesage sender={sender} recipient={recipient} />

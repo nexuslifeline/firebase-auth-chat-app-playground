@@ -8,6 +8,7 @@ export default function SidePane({ children }) {
     <Box
       sx={{
         display: "flex",
+        height: "100%",
         borderRight: { xs: 1 },
         borderRightColor: { xs: "divider" },
       }}

@@ -13,7 +13,6 @@ export default function MessageList({ threadId, sx }) {
         display: "flex",
         flexDirection: "column",
         flexGrow: 1,
-        height: "calc(100vh - 150px)",
         overflow: "auto",
         padding: 1,
         overflow: "auto",
