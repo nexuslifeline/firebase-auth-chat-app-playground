@@ -7,8 +7,9 @@ import useUsers from "@/shared/hooks/firebase/useUsers";
 import useThreads from "@/shared/hooks/firebase/useThreads";
 import { useAuthContext } from "@/shared/context/AuthContext";
 import { useThreadContext } from "@/shared/context/ThreadContext";
+import withNotifications from "@/shared/hoc/withNotifications";
 
-export default function UserList({ sx }) {
+const UserList = ({ sx, notify }) => {
   const { users, isLoading } = useUsers();
   const { currentUser } = useAuthContext();
   const { setCurrentThreadId, setSender, setRecipient } = useThreadContext();
@@ -21,7 +22,11 @@ export default function UserList({ sx }) {
     setSender(currentUser);
     setRecipient(recipient);
 
-    await addThread(currentUser, recipient);
+    try {
+      await addThread(currentUser, recipient);
+    } catch (err) {
+      notify(err);
+    }
   };
 
   useEffect(() => {
@@ -77,4 +82,6 @@ export default function UserList({ sx }) {
       </Box>
     </Box>
   );
-}
+};
+
+export default withNotifications(UserList);

@@ -6,8 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 
 import useThreads from "@/shared/hooks/firebase/useThreads";
+import withNotifications from "@/shared/hoc/withNotifications";
 
-export default function ChatBoxActions({ sender, recipient }) {
+const SendMessage = ({ sender, recipient, notify }) => {
   const { addThreadMessage } = useThreads();
 
   const [message, setMessage] = useState("");
@@ -18,7 +19,11 @@ export default function ChatBoxActions({ sender, recipient }) {
     if (!text) return;
 
     setMessage("");
-    addThreadMessage({ message: text, sender, recipient });
+    try {
+      addThreadMessage({ message: text, sender, recipient });
+    } catch (err) {
+      notify(err);
+    }
   };
 
   return (
@@ -62,4 +67,6 @@ export default function ChatBoxActions({ sender, recipient }) {
       </Box>
     </Box>
   );
-}
+};
+
+export default withNotifications(SendMessage);
