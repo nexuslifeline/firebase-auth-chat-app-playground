@@ -29,6 +29,8 @@ export default function useMessages(threadId) {
       orderBy("createdAt")
     );
 
+    // Set up a real-time listener (onSnapshot) for the query, which updates
+    // the messages state whenever there are changes in the Firestore collection.
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const items = [];
       snapshot.forEach((doc) => {

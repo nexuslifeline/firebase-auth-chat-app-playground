@@ -15,10 +15,12 @@ import { app } from "@/config/firebase";
 const db = getFirestore(app);
 
 export default function useThreads() {
+  // Function to create a unique thread ID based on participant UIDs
   const createThreadId = (participantsUid = []) => {
     return participantsUid.sort().join("-");
   };
 
+  // Function to add a thread to Firestore based on sender and recipient
   const addThread = async (sender, recipient) => {
     const threadId = createThreadId([sender?.uid, recipient?.uid]);
 
@@ -37,6 +39,7 @@ export default function useThreads() {
     return threadId;
   };
 
+  // Function to add a message to a thread in Firestore
   const addThreadMessage = async ({ sender, recipient, message }) => {
     try {
       const threadId = createThreadId([sender?.uid, recipient?.uid]);

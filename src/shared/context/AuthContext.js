@@ -20,6 +20,9 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Subscribe to authentication state changes using onAuthStateChanged.
+    // It updates the state variables accordingly, fetching user details
+    // if a user is authenticated.
     const unsubscribe = onAuth((u) => {
       if (!u?.uid) {
         setCurrentUser(null);

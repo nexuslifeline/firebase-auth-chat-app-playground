@@ -32,6 +32,8 @@ export default function useUsers() {
   useEffect(() => {
     const q = query(collection(db, "users"));
 
+    // Set up a real-time listener (onSnapshot) for the query, which updates
+    // the users state whenever there are changes in the Firestore collection.
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const items = [];
       snapshot.forEach((doc) => {
