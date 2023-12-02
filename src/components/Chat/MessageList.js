@@ -15,6 +15,7 @@ export default function MessageList({ threadId, sx }) {
 
   useEffect(() => {
     if (!messages?.length) return;
+    if (!scrollRef?.current) return;
     scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages?.length]);
 
