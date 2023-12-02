@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useState, createContext, useContext } from "react";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 import useFirebaseAuth from "../hooks/firebase/useFirebaseAuth";
 import useUsers from "../hooks/firebase/useUsers";
 
@@ -33,8 +37,22 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser, isLoading }}>
-      {isLoading ? <div>Loading...</div> : children}
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, isLoading }}>
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 };
