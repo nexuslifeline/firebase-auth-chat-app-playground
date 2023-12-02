@@ -1,19 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
+import { Typography } from "@mui/material";
+
 import Box from "@mui/material/Box";
 
 import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
+import { useAuthContext } from "@/shared/context/AuthContext";
 import withNotifications from "@/shared/hoc/withNotifications";
-import { Typography } from "@mui/material";
 
 const SignIn = ({ notify }) => {
   const { signIn } = useFirebaseAuth();
+  const { currentUser, isLoading: isCurrentUserLoading } = useAuthContext();
+
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -32,6 +36,16 @@ const SignIn = ({ notify }) => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!isCurrentUserLoading && currentUser) {
+      notify({
+        message: "You are already logged in.",
+        color: "success",
+      });
+      setTimeout(() => router.push("/home"), 500);
+    }
+  }, []);
 
   return (
     <Box

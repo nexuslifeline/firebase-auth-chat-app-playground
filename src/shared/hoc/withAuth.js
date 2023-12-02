@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "@/shared/context/AuthContext";
 import { useRouter } from "next/navigation";
 
@@ -9,8 +9,9 @@ const withAuth = (WrappedComponent) => {
 
     useEffect(() => {
       if (isLoading) return;
+      console.log("withAuth currentUser: ", currentUser);
       if (!currentUser) router.push("/");
-    }, [isLoading, currentUser, router]);
+    }, [isLoading, currentUser]);
 
     return !isLoading && currentUser ? <WrappedComponent {...props} /> : null;
   };

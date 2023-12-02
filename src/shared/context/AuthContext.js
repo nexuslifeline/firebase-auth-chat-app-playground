@@ -27,6 +27,7 @@ export const AuthContextProvider = ({ children }) => {
         return;
       }
 
+      setIsLoading(true);
       getUser(u.uid).then((user) => {
         setCurrentUser(user);
         setIsLoading(false);
