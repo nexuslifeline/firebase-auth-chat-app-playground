@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
 import Box from "@mui/material/Box";
-import User from "./User";
+import TextField from "@mui/material/TextField";
 
+import User from "./User";
 import useUsers from "@/shared/hooks/firebase/useUsers";
 import useThreads from "@/shared/hooks/firebase/useThreads";
 import { useAuthContext } from "@/shared/context/AuthContext";
@@ -32,20 +33,33 @@ export default function UserList() {
   }, [isLoading]);
 
   return (
-    <Box sx={{ flexGrow: 1, overflow: "auto", padding: "12px" }}>
-      {users.map(
-        (user) =>
-          currentUser?.uid !== user?.uid && (
-            <User
-              key={user?.uid}
-              size={36}
-              data={user}
-              padding={"10px"}
-              cursor="pointer"
-              onSelect={handleSelect}
-            />
-          )
-      )}
+    <Box sx={{ flexGrow: 1, overflow: "auto", padding: "0 12px" }}>
+      <TextField
+        margin="normal"
+        required
+        fullWidth
+        id="search"
+        placeholder="Search user here"
+        name="search"
+        size="small"
+        autoFocus
+      />
+      <Box>
+        {users.map(
+          (user) =>
+            currentUser?.uid !== user?.uid && (
+              <User
+                key={user?.uid}
+                size={36}
+                data={user}
+                padding={"10px"}
+                cursor="pointer"
+                onSelect={handleSelect}
+                sx={{ "&:hover": { bgcolor: "grey.200" }, borderRadius: 2 }}
+              />
+            )
+        )}
+      </Box>
     </Box>
   );
 }

@@ -9,7 +9,7 @@ export default function SidePane({ children }) {
       sx={{
         display: "flex",
         borderRight: { xs: 0, sm: 1 },
-        borderRightColor: { sm: "secondary.dark" },
+        borderRightColor: { sm: "divider" },
       }}
     >
       <ProfilePane />

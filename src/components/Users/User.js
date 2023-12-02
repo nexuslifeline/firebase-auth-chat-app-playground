@@ -8,12 +8,19 @@ export default function User({
   subtitle = "",
   size = 32,
   onSelect,
+  sx,
   ...props
 }) {
   return (
     <Box
       onClick={() => onSelect?.(data)}
-      sx={{ flexGrow: 1, display: "flex", alignItems: "center", ...props }}
+      sx={{
+        flexGrow: 1,
+        display: "flex",
+        alignItems: "center",
+        ...props,
+        ...sx,
+      }}
     >
       <AvatarMaker name={data?.name} size={size} />
       <Box
