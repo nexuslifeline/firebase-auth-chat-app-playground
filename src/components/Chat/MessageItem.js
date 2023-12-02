@@ -4,23 +4,27 @@ import Box from "@mui/material/Box";
 
 import AvatarMaker from "../AvatarMaker";
 import { useAuthContext } from "@/shared/context/AuthContext";
+import { areDateAndTimeEqual } from "@/shared/lib/utils";
 
 export default function MessageItem({
   data: { message, sender, recipient, createdAt } = {},
+  prevData,
   children,
 }) {
   const { currentUser } = useAuthContext();
   const isOwner = sender?.uid === currentUser?.uid;
 
-  console.log("createdAt", typeof createdAt, createdAt.seconds);
-
   const postedDate = createdAt?.seconds
-    ? new Date(createdAt.seconds * 1000).toLocaleString()
+    ? new Date(createdAt.seconds * 1000)
+    : "";
+
+  const prevPostedDate = prevData?.createdAt?.seconds
+    ? new Date(prevData.createdAt.seconds * 1000)
     : "";
 
   return (
     <>
-      {postedDate && (
+      {postedDate && !areDateAndTimeEqual(postedDate, prevPostedDate) && (
         <Box
           sx={{
             display: "flex",
@@ -30,12 +34,12 @@ export default function MessageItem({
         >
           <Typography
             component="span"
-            fontSize={11}
+            fontSize={12}
             margin={0}
             borderRadius={6}
-            color={grey[500]}
+            color={grey[600]}
           >
-            {new Date(createdAt.seconds * 1000).toLocaleString()}
+            {postedDate.toLocaleString()}
           </Typography>
         </Box>
       )}

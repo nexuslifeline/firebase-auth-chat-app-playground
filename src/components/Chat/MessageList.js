@@ -47,7 +47,13 @@ export default function MessageList({ threadId }) {
       ) : (
         messages?.map(
           (data, index) =>
-            data?.message && <MessageItem key={index} data={data} />
+            data?.message && (
+              <MessageItem
+                key={index}
+                data={data}
+                prevData={index > 0 && messages[index - 1]}
+              />
+            )
         )
       )}
     </Box>
