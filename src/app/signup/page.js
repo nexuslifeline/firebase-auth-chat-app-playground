@@ -11,11 +11,12 @@ import Container from "@mui/material/Container";
 
 import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
 import useUsers from "@/shared/hooks/firebase/useUsers";
+import withNotifications from "@/shared/hoc/withNotifications";
 
-export default function SignIn() {
+const SignUp = ({ notify }) => {
+  const router = useRouter();
   const { register } = useFirebaseAuth();
   const { addUser } = useUsers();
-  const router = useRouter();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,8 +32,7 @@ export default function SignIn() {
       await addUser({ name, uid: response.user.uid });
       router.push("/home");
     } catch (err) {
-      console.error(err);
-      alert("Error occured!");
+      notify(err);
     } finally {
       setIsLoading(false);
     }
@@ -112,4 +112,6 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-}
+};
+
+export default withNotifications(SignUp);
