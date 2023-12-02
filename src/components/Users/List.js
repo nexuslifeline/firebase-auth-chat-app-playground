@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 
 import User from "./User";
 import useUsers from "@/shared/hooks/firebase/useUsers";
@@ -9,7 +8,7 @@ import useThreads from "@/shared/hooks/firebase/useThreads";
 import { useAuthContext } from "@/shared/context/AuthContext";
 import { useThreadContext } from "@/shared/context/ThreadContext";
 
-export default function UserList() {
+export default function UserList({ sx }) {
   const { users, isLoading } = useUsers();
   const { currentUser } = useAuthContext();
   const { setCurrentThreadId, setSender, setRecipient } = useThreadContext();
@@ -33,17 +32,7 @@ export default function UserList() {
   }, [isLoading]);
 
   return (
-    <Box sx={{ flexGrow: 1, overflow: "auto", padding: "0 12px" }}>
-      <TextField
-        margin="normal"
-        required
-        fullWidth
-        id="search"
-        placeholder="Search user here"
-        name="search"
-        size="small"
-        autoFocus
-      />
+    <Box sx={{ flexGrow: 1, overflow: "auto", padding: "0 12px", ...sx }}>
       <Box>
         {users.map(
           (user) =>

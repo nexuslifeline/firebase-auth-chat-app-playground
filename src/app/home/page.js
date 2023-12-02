@@ -6,17 +6,16 @@ import Box from "@mui/material/Box";
 
 import Chat from "@/components/Chat";
 import SidePane from "@/components/SidePane";
-import SidePaneHeader from "@/components/SidePane/Header";
-import UserList from "@/components/Users/List";
 import withAuth from "@/shared/hoc/withAuth";
 const HomePage = () => {
   return (
     <Box
-      margin={"0 auto"}
       sx={{
         display: "flex",
         width: "100%",
+        height: "100%",
         overflow: "hidden",
+        margin: "0 auto",
       }}
     >
       <SidePane />

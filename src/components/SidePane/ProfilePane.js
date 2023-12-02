@@ -24,16 +24,16 @@ export default function ProfilePane() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minWidth: 60,
+        minWidth: 55,
         alignItems: "center",
-        padding: "10px 5px",
+        padding: "10px 3px",
         height: "100%",
         bgcolor: "secondary.dark",
       }}
     >
       <AvatarMaker
         name={currentUser?.name}
-        size={40}
+        size={38}
         border={1}
         borderColor="white"
       />
