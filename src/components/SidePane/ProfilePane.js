@@ -28,7 +28,9 @@ export default function ProfilePane() {
         alignItems: "center",
         padding: "10px 3px",
         height: "100%",
-        bgcolor: "secondary.dark",
+        // bgcolor: "secondary.dark",
+        background:
+          "linear-gradient(-225deg, #AC32E4 0%, #7918F2 48%, #4801FF 100%)",
       }}
     >
       <AvatarMaker

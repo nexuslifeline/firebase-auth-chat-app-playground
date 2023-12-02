@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 
 import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
 import withNotifications from "@/shared/hoc/withNotifications";
+import { Typography } from "@mui/material";
 
 const SignIn = ({ notify }) => {
   const { signIn } = useFirebaseAuth();
@@ -36,16 +34,40 @@ const SignIn = ({ notify }) => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        display: "flex",
+        width: "100%",
+        height: "auto",
+        maxWidth: { lg: "1100px", xs: "100%" },
+        borderRadius: 2,
+        maxHeight: "650px",
+        overflow: "hidden",
+        margin: "auto",
+        border: { xs: 0, lg: 1 },
+        borderColor: { lg: "grey.400", xs: "transparent" },
+      }}
+    >
       <Box
         sx={{
-          marginTop: 8,
+          flex: "45%",
+          // maxWidth: "500px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
+          padding: "30px",
         }}
       >
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Typography variant="h5" mb={3} color="secondary.dark">
+          Welcome to ChatHub
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ mt: 1, maxWidth: "400px" }}
+        >
           <TextField
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -70,14 +92,12 @@ const SignIn = ({ notify }) => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
+            color="secondary"
+            size="large"
             sx={{ mt: 3, mb: 2 }}
             disabled={isLoading}
           >
@@ -90,7 +110,28 @@ const SignIn = ({ notify }) => {
           </Box>
         </Box>
       </Box>
-    </Container>
+      <Box
+        sx={{
+          flex: "55%",
+          background:
+            "linear-gradient(-225deg, #AC32E4 0%, #7918F2 48%, #4801FF 100%)",
+          minHeight: "550px",
+          display: { xs: "none", lg: "inline-flex" },
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box sx={{ width: "100%", maxWidth: "420px" }}>
+          <Typography variant="h4" mb={4} color="white">
+            Connect & Communicate: Your World in One Chat!
+          </Typography>
+          <Typography paragraph mb={2} fontSize={18} color="white">
+            Welcome to our revolutionary web chat app, where seamless
+            communication meets boundless possibilities.
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
