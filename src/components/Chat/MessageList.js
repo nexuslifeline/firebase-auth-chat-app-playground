@@ -25,6 +25,7 @@ export default function MessageList({ threadId, sx }) {
         },
         "&::-webkit-scrollbar-thumb": {
           backgroundColor: "grey.500",
+          borderRadius: "10px",
         },
         "&::-webkit-scrollbar-thumb:hover": {
           background: "grey.300",

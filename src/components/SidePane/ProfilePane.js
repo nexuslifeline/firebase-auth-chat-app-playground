@@ -24,11 +24,10 @@ export default function ProfilePane() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minWidth: 55,
         alignItems: "center",
-        padding: "10px 3px",
+        justifyContent: "space-between",
+        padding: "10px 5px",
         height: "100%",
-        // bgcolor: "secondary.dark",
         background:
           "linear-gradient(-225deg, #AC32E4 0%, #7918F2 48%, #4801FF 100%)",
       }}
@@ -40,11 +39,7 @@ export default function ProfilePane() {
         borderColor="white"
       />
 
-      <Button
-        variant="text"
-        sx={{ marginTop: "auto", minWidth: 0 }}
-        onClick={handleSignOut}
-      >
+      <Button variant="text" sx={{ minWidth: 0 }} onClick={handleSignOut}>
         <LogoutIcon style={{ color: "white" }} />
       </Button>
     </Box>

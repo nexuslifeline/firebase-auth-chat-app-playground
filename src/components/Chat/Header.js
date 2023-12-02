@@ -4,12 +4,19 @@ import User from "@/components/Users/User";
 
 export default function ChatBoxHeader({ recipient }) {
   return (
-    <Box sx={{ height: 60, display: "flex", width: "100%" }}>
+    <Box
+      sx={{
+        minHeight: "60px",
+        display: "flex",
+        width: "100%",
+        borderBottom: 1,
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          height: 60,
+          height: "60px",
           padding: "0 20px",
           borderBottom: 1,
           borderBottomColor: "divider",

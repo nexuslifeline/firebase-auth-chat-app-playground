@@ -40,9 +40,11 @@ export default function UserListPane() {
         width: isOpen ? width : 0,
         position: "relative",
         height: "100%",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <Box sx={{ padding: "0 10px", display: isOpen ? "block" : "none" }}>
+      <Box sx={{ padding: "0 10px", display: isOpen ? "flex" : "none" }}>
         <TextField
           margin="normal"
           required
@@ -54,7 +56,7 @@ export default function UserListPane() {
           autoFocus
         />
       </Box>
-      <UserList sx={{ display: isOpen ? "block" : "none" }} />
+      <UserList sx={{ display: isOpen ? "flex" : "none" }} />
       <IconButton
         onClick={() => setIsOpen((p) => !p)}
         size="small"

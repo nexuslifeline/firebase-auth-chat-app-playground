@@ -35,27 +35,29 @@ export default function UserList({ sx }) {
     <Box
       sx={{
         flexGrow: 1,
-        height: "calc(100% - 60px)",
+        overflow: "auto",
+        width: "100%",
+        "&::-webkit-scrollbar": {
+          width: "8px",
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "grey.300",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "grey.500",
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "grey.300",
+        },
         ...sx,
       }}
     >
       <Box
         sx={{
+          width: "100%",
           height: "100%",
-          overflow: "auto",
-          padding: "0 12px",
-          "&::-webkit-scrollbar": {
-            width: "8px",
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "grey.300",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "grey.500",
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            background: "grey.300",
-          },
+          padding: "0 8px",
         }}
       >
         {users.map(
