@@ -32,14 +32,15 @@ export default function UserList() {
   }, [isLoading]);
 
   return (
-    <Box sx={{ flexGrow: 1, overflow: "auto" }}>
+    <Box sx={{ flexGrow: 1, overflow: "auto", padding: "12px" }}>
       {users.map(
         (user) =>
           currentUser?.uid !== user?.uid && (
             <User
               key={user?.uid}
+              size={36}
               data={user}
-              padding={1}
+              padding={"10px"}
               cursor="pointer"
               onSelect={handleSelect}
             />

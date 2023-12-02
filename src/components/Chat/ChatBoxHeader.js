@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-import User from "./User";
+import User from "@/components/Users/User";
 
 export default function ChatBoxHeader({ recipient }) {
   return (

@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-import User from "./User";
+import User from "@/components/Users/User";
 import { useAuthContext } from "@/shared/context/AuthContext";
 
 export default function SidePaneHeader({ onSignOut }) {

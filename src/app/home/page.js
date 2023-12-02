@@ -2,23 +2,30 @@
 
 import { useRouter } from "next/navigation";
 
+import Box from "@mui/material/Box";
+
 import Chat from "@/components/Chat";
+import SidePane from "@/components/SidePane";
+import SidePaneHeader from "@/components/SidePane/Header";
+import UserList from "@/components/Users/List";
 import withAuth from "@/shared/hoc/withAuth";
-import useFirebaseAuth from "@/shared/hooks/firebase/useFirebaseAuth";
-import { useAuthContext } from "@/shared/context/AuthContext";
-
 const HomePage = () => {
-  const { logout } = useFirebaseAuth();
-  const { setCurrentUser } = useAuthContext();
-  const router = useRouter();
-
-  const handleSignOut = () => {
-    setCurrentUser(null);
-    logout();
-    router.push("/");
-  };
-
-  return <Chat onSignOut={handleSignOut} />;
+  return (
+    <Box
+      margin={"0 auto"}
+      sx={{
+        display: "flex",
+        width: "100%",
+        overflow: "hidden",
+      }}
+    >
+      <SidePane>
+        <SidePaneHeader />
+        <UserList />
+      </SidePane>
+      <Chat />
+    </Box>
+  );
 };
 
 export default withAuth(HomePage);

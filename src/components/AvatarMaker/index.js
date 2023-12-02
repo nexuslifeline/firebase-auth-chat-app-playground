@@ -27,7 +27,12 @@ const generateColor = (name = "") => {
 export default function AvatarMaker({ name = "", size = 32, ...props }) {
   return (
     <Avatar
-      sx={{ bgcolor: generateColor(name), width: size, height: size, ...props }}
+      sx={{
+        bgcolor: generateColor(name),
+        width: size,
+        height: size,
+        ...props,
+      }}
     >
       {name.charAt(0).toUpperCase()}
     </Avatar>
