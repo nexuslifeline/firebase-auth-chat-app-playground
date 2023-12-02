@@ -14,10 +14,11 @@ export default function MessageList({ threadId, sx }) {
   const { messages, isLoading } = useMessages(threadId);
 
   useEffect(() => {
+    if (isLoading) return;
     if (!messages?.length) return;
     if (!scrollRef?.current) return;
     scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [messages?.length]);
+  }, [messages?.length, isLoading]);
 
   return (
     <Box
