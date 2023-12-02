@@ -9,14 +9,14 @@ export default function ChatBoxHeader({ recipient }) {
         sx={{
           display: "flex",
           alignItems: "center",
-          height: 50,
-          padding: "0 10px",
+          height: 60,
+          padding: "0 20px",
           borderBottom: 1,
-          borderBottomColor: "grey.400",
-          bgcolor: "grey.100",
+          borderBottomColor: "divider",
+          bgcolor: "grey.5",
         }}
       >
-        {recipient?.name && <User data={recipient} />}
+        {recipient?.name && <User data={recipient} size={36} />}
       </Box>
     </Box>
   );

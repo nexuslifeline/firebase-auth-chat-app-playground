@@ -19,10 +19,7 @@ const HomePage = () => {
         overflow: "hidden",
       }}
     >
-      <SidePane>
-        <SidePaneHeader />
-        <UserList />
-      </SidePane>
+      <SidePane />
       <Chat />
     </Box>
   );

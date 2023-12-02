@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import SendIcon from "@mui/icons-material/Send";
 
 import useThreads from "@/shared/hooks/firebase/useThreads";
 
@@ -13,6 +14,9 @@ export default function ChatBoxActions({ sender, recipient }) {
 
   const handleSend = () => {
     const text = message.trim();
+
+    if (!text) return;
+
     setMessage("");
     addThreadMessage({ message: text, sender, recipient });
   };
@@ -20,26 +24,36 @@ export default function ChatBoxActions({ sender, recipient }) {
   return (
     <Box
       sx={{
-        height: 55,
-        borderTop: 1,
-        borderTopColor: "grey.400",
+        padding: "10px 15px",
         display: "flex",
       }}
     >
       <TextField
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSend();
+          }
+        }}
+        size="normal"
         sx={{
           flexGrow: 1,
-          "& fieldset": { border: "none" },
+          borderRadius: 4,
+          marginRight: "10px",
         }}
-        multiline
-        maxRows={4}
         autoFocus
       />
-      <Button onClick={handleSend} variant="contained" sx={{ borderRadius: 0 }}>
-        Send
-      </Button>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+          aria-label="send"
+          disabled={!message?.trim()}
+          onClick={handleSend}
+          size="large"
+        >
+          <SendIcon sx={{ color: "secondary.main" }} />
+        </IconButton>
+      </Box>
     </Box>
   );
 }

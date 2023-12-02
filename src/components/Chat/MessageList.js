@@ -32,9 +32,10 @@ export default function MessageList({ threadId }) {
         },
       }}
     >
-      {messages?.map((data, index) => (
-        <MessageItem key={index} data={data} />
-      ))}
+      {messages?.map(
+        (data, index) =>
+          data?.message && <MessageItem key={index} data={data} />
+      )}
     </Box>
   );
 }
