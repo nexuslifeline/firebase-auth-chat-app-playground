@@ -47,9 +47,7 @@ export default function MessageItem({
           justifyContent: !isOwner ? "flex-start" : "flex-end",
         }}
       >
-        {!isOwner && (
-          <AvatarMaker name={recipient?.name || ""} marginRight={1} />
-        )}
+        {!isOwner && <AvatarMaker name={sender?.name || ""} marginRight={1} />}
 
         <Typography
           component="span"
