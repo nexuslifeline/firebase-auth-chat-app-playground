@@ -25,6 +25,10 @@ const SignIn = ({ notify }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   console.log("process.env.VERCEL_ENV", process.env.VERCEL_ENV);
+  console.log(
+    "process.env.NEXT_PUBLIC_VERCEL_ENV",
+    process.env.NEXT_PUBLIC_VERCEL_ENV
+  );
 
   const handleSubmit = async event => {
     event.preventDefault();
